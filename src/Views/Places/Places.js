@@ -2,19 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Container } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import SubHeader from '../../Components/SubHeader/SubHeader.jsx';
+import SubHeader from '../../Components/SubHeader/SubHeader';
 import AddCircle from '@material-ui/icons/AddCircleOutline';
+import Header from '../../Components/Header/Header';
 import { Link } from 'react-router-dom';
-import Card from '../../Components/Card/CardPlace.jsx';
+import Card from '../../Components/Card/CardPlace';
 import RestService from '../../Services/RestService';
 
 const useStyles = makeStyles(theme => ({
     root: {
         margin: theme.spacing(1),
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        textAlign: 'left'
+        overflow: 'hidden'
     },
 
     div_list: {
@@ -46,10 +44,6 @@ const useStyles = makeStyles(theme => ({
     button: {
         color: 'white',
         fontSize: '40pt'
-    },
-
-    div_add: {
-        height: '100%'
     }
 }));
 
@@ -71,11 +65,12 @@ export default function Places(props) {
 
     const listPlaces = () => {
         restService.get((success) => {
-            if (success.places.length > 0) {
-                setSubtitle(success.places.length + ' lugares cadastrados');
-                setPlaces(success.places);
+            if (success.length > 0) {
+                setSubtitle(success.length + ' lugares cadastrados');
+                setPlaces(success);
             } else {
-                setMessage(<div style={{ color: 'white' }}>NÃO EXISTEM LUGARES PARA EXIBIR</div>);
+                setSubtitle('Não existem lugares cadastrados');
+                setMessage('');
             }
         },
             (error) => {
@@ -85,8 +80,9 @@ export default function Places(props) {
 
     return (
         <div className={classes.root}>
+            <Header />
             <Container maxWidth="xl">
-                <SubHeader title={props.pageName} subtitle={subtitle} />
+                <SubHeader title="Lugares" subtitle={subtitle} />
                 {
                     places.length > 0 ?
                         places.map(prop => (

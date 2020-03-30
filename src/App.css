@@ -1,38 +1,52 @@
-html {
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  font-family: Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
   background-color: #1b1b1b;
 }
 
 .App {
   text-align: center;
-  font-family: sans-serif;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
 }
 
 .header {
-  margin: 1em 0 1em 0;
-  font-size: 20pt;
   background-color: transparent;
   color: #f5f5f5;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  font-family:  Roboto, sans-serif;
+  margin: 2em;
 }
 
-.sub_header {
-  margin: 1em 0 1em 0;
-  background-color: transparent;
-  text-align: left;
+#back {
+  font-size: 2em;
 }
 
-.sub_header h1 {
+.header h1 {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+section h1 {
   color: #ffc107;
   font-weight: 900;
-  margin: 0;
+  font-size: 2em;
 }
 
-.sub_header p {
+section p {
   color: #e0e0e0;
+  font-size: 1;
+  margin-top: 10px;
 }
 
 .card-place, .card-dish {
@@ -40,7 +54,9 @@ html {
   margin: 1em 0 1em 0;
   border-radius: 10px;
   color:#eeeeee;
-  height: 6em;
+  padding-bottom: 12px;
+  min-height: 6em;
+  height: auto !important;
   text-align: left;
 
   -webkit-box-shadow: 3px 9px 20px 1px rgba(0,0,0,0.29);
@@ -51,6 +67,7 @@ html {
 .card-dish {
   border-radius: 5px;
   border-left: 5px solid #ffc107;
+  height: 8em;
 }
 
 .card-dish #card-dish-content {
@@ -67,37 +84,44 @@ html {
 }
 
 .card-dish #title {
-  font-weight: 600;
+  font-weight: bolder;
   display: flex;
   justify-content: space-between;
 }
 
 .card-dish #title span, .card-dish p {
-  margin: 10px;
+  margin-left: 20px;
+}
+
+.card-dish #title span, .card-dish p {
+  padding: 10px 20px 0 0;
+  margin-bottom: 10px;
 }
 
 .card-place div {
   margin: 20px;
 }
 
-.card-place p {
-  font-size: 14pt;
-  font-weight: 100;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
+input, textarea {
+  border-width: 0px;
+  padding: 0 5px;
+  border-radius: 5px;
 }
 
-input[type="text"], textarea {
-  height: 2em;
-  border-width: 0px;
-  padding: 8px 0px 8px 0px;
-  border-radius: 5px;
+input {
+  height: 40px;
+  width: 100%;
+}
+
+textarea {
+  padding-top: 10px;
+  height: 130px;
+  width: 100%;
 }
 
 label {
   display: block;
   font-size: 10pt;
-  font-family: Arial, Helvetica, sans-serif;
   text-align: left;
   margin-bottom: 0.5em;
   margin-top: 2em;
@@ -106,9 +130,11 @@ label {
 
 p {
   color:#eeeeee;
-  font-size: 10pt;
+  font-size: 1em;
+  font-weight: 100;
 }
 
 a {
   text-decoration: none;
+  color: #eeeeee;
 }

@@ -1,53 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
 import { Button, Container } from '@material-ui/core/';
-import SubHeader from '../../Components/SubHeader/SubHeader.jsx';
+import Header from '../../Components/Header/Header';
+import SubHeader from '../../Components/SubHeader/SubHeader';
 import RestService from '../../Services/RestService';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
         overflow: 'hidden',
-        '& input, textarea, div, form': {
-            width: '100%'
-        },
         textAlign: 'left'
-    },
-
-    loading: {
-        '& span': {
-            padding: theme.spacing(2)
-        },
-
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: '12pt',
-        color: 'white'
     },
 
     button: {
         '&:hover': {
-            backgroundColor: 'white',
+            backgroundColor: 'rgb(255, 202, 40)',
         },
         backgroundColor: '#ffc107',
         color: 'black',
-        fontWeight: 'bold',
-        width: '100%',
-        padding: '5px 15px 5px 15px'
+        width: '100%'
     }
 }));
 
 export default function Dishes(props) {
     const classes = useStyles();
-    const [places, setPlaces] = useState(false);
-    const [subtitle, setSubtitle] = useState(false);
-    const [disheForm, setDisheForm] = useState({ name: '', price: 'R$0,00', description: '' });
+    const [placeName, setPlaceName] = useState('');
+    const [disheForm, setDisheForm] = useState({ name: '', price: '', description: '' });
 
-    const restService = new RestService(`api/places/${props.match.params.id}/dishes`);
+    const restServiceDishes = new RestService(`/api/places/${props.match.params.id}/dishes`);
+    const restServicePlaces = new RestService(`/api/places/${props.match.params.id}`);
+
+    useEffect(() => {
+        getPlace();
+    }, []);
 
     const changeFieldForm = e => {
         setDisheForm({
@@ -57,8 +41,19 @@ export default function Dishes(props) {
     };
 
     const createDishe = () => {
-        restService.post(disheForm, (success) => {
-            alert('Prato cadastrado com sucesso!');
+        restServiceDishes.post(disheForm, (success) => {
+            alert(success.message);
+            setDisheForm({ name: '', price: '', description: '' });
+        }, (error) => {
+            console.log(error);
+        });
+    };
+
+    const getPlace = () => {
+        restServicePlaces.get((success) => {
+            if (success.length > 0) {
+                setPlaceName(success[0].name);
+            }
         }, (error) => {
             console.log(error);
         });
@@ -66,8 +61,9 @@ export default function Dishes(props) {
 
     return (
         <div className={classes.root}>
+            <Header showBack />
             <Container maxWidth="xs">
-                <SubHeader title="Cadastrar" />
+                <SubHeader title={placeName} />
                 <form>
                     <div>
                         <label>Nome do prato</label>
@@ -93,7 +89,7 @@ export default function Dishes(props) {
                     </div>
                     <br />
                     <Button variant="contained" disableElevation className={classes.button} onClick={() => { createDishe() }}>
-                        SALVAR
+                        Salvar
                     </Button>
                 </form>
             </Container>

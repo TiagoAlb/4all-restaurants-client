@@ -19,7 +19,7 @@ export default class RestService {
                     error(res);
                 }
             }).catch(err => {
-                error(err.response.data.message);
+                error(err);
             });;
     }
 
@@ -37,7 +37,7 @@ export default class RestService {
                     error(res);
                 }
             }).catch(err => {
-                error(err.response.data.message);
+                error(err);
             });
     }
 

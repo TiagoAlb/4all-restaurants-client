@@ -1,6 +1,6 @@
-import Places from '../Views/Places/Places.jsx';
-import Dishes from '../Views/Dishes/Dishes.jsx';
-import NewDishe from '../Views/Dishes/NewDishe.jsx';
+import Places from '../Views/Places/Places';
+import Dishes from '../Views/Dishes/Dishes';
+import NewDishe from '../Views/Dishes/NewDishe';
 
 const routes = [
     { path: "/places", name: "Lugares", component: Places },

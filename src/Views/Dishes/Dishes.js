@@ -2,27 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, Container } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import IconButton from '@material-ui/core/IconButton';
-import SubHeader from '../../Components/SubHeader/SubHeader.jsx';
-import AddCircle from '@material-ui/icons/AddCircleOutline';
+import Header from '../../Components/Header/Header';
+import SubHeader from '../../Components/SubHeader/SubHeader';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import Card from '../../Components/Card/CardDish.jsx';
+import Card from '../../Components/Card/CardDish';
 import RestService from '../../Services/RestService';
 
 const useStyles = makeStyles(theme => ({
     root: {
         margin: theme.spacing(1),
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        '& input, textarea, div, form': {
-            width: '100%'
-        },
-        textAlign: 'left'
+        overflow: 'hidden'
     },
 
     fab: {
+        '&:hover': {
+            backgroundColor: 'rgb(255, 202, 40)',
+        },
         position: 'fixed',
         backgroundColor: '#ffc107',
         bottom: theme.spacing(2),
@@ -45,37 +41,59 @@ const useStyles = makeStyles(theme => ({
 export default function Dishes(props) {
     const classes = useStyles();
     const [dishes, setDishes] = useState(false);
-    const [subtitle, setSubtitle] = useState(false);
+    const [placeName, setPlaceName] = useState('');
+    const [subTitle, setSubTitle] = useState('Não existem pratos cadastrados');
     const [message, setMessage] = useState(
         <div className={classes.loading}>
             <CircularProgress color="secondary" />
             <span>CARREGANDO PRATOS...</span>
-        </div>);
+        </div>
+    );
 
     useEffect(() => {
         listDishes();
     }, []);
 
-    const restService = new RestService(`api/places/${props.match.params.id}/dishes`);
+    useEffect(() => {
+        getPlace();
+    }, []);
+
+    const restServiceDishes = new RestService(`/api/places/${props.match.params.id}/dishes`);
+    const restServicePlaces = new RestService(`/api/places/${props.match.params.id}`);
 
     const listDishes = () => {
-        restService.get((success) => {
-            if (success.dishes.length > 0) {
-                setSubtitle(success.dishes.length + ' pratos cadastrados');
-                setDishes(success.dishes);
+        restServiceDishes.get((success) => {
+            if (success.length > 0) {
+                setDishes(success);
             } else {
-                setMessage(<div style={{ color: 'white' }}>NÃO EXISTEM PRATOS PARA EXIBIR</div>);
+                setMessage('');
             }
-        },
-            (error) => {
-                alert(error);
-            });
+        }, (error) => {
+            alert(error);
+        });
+    };
+
+    const getPlace = () => {
+        restServicePlaces.get((success) => {
+            if (success.length > 0) {
+                setPlaceName(success[0].name);
+                const count = success[0].dishes_count;
+                if (count > 0)
+                    if (count > 1)
+                        setSubTitle(count + ' pratos cadastrados');
+                    else
+                        setSubTitle(count + ' prato cadastrado');
+            }
+        }, (error) => {
+            console.log(error);
+        });
     };
 
     return (
         <div className={classes.root}>
+            <Header showBack />
             <Container maxWidth="xl">
-                <SubHeader title={props.pageName} subtitle={subtitle} />
+                <SubHeader title={placeName} subtitle={subTitle} />
                 {
                     dishes.length > 0 ?
                         dishes.map(prop => (
