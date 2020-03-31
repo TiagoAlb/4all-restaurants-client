@@ -1,72 +1,69 @@
-<<<<<<< HEAD
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Servidor de aplicação
 
-## Available Scripts
+Foi configurado o projeto em um servidor externo, para facilitar os testes da equipe. 
 
-In the project directory, you can run:
+Link do projeto: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:3001/
 
+Para testes de requisições a API: http://ec2-18-229-143-41.sa-east-1.compute.amazonaws.com:3333/
+
+# Client-Side
+
+A aplicação foi desenvolvida utilizando, para o lado do cliente, React na sua nova versão com uso de Hooks. Para instalção dos pacotes externos do projeto e funcionamento da aplicação é necessária a instalação do NodeJS. 
+
+# Server-Side
+
+Para a parte do servidor, foi utilizado Node JS, com Express, banco de dados SQLite e o Knex migration para controle de versão da base.
+
+# Configuração
+Realizar a instação do Node JS
+Veja mais em: [NodeJS](https://nodejs.org/en/)
+
+Com o NodeJS instalado, rode o seguinte comando no diretório do projeto de cada um dos projetos (4allTest-Client e 4allTest-Server):
+### `npm install`
+
+Após a instalação dos pacotes o comando a baixo iniciará o servidor - Rode o comando para cada um dos dirtórios dos projetos (4allTest-Client e 4allTest-Server):
 ### `npm start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Banco de dados
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Como informado na entrega da atividade, foi realizado o banco de dados SQLite
 
-### `npm test`
+## Endpoints
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Foram criados endpoints de cominicação do lado do servidor para comunicação entre cliente e server, dentre eles estão:
+### GET:
+Listar lugares: /api/places
 
-### `npm run build`
+Listar lugar específico: /api/places/{placeId}
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Listar pratos: /api/places/{placeId}/dishes
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### POST:
+Criar novo lugar: /api/places
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Criar novo prato em um lugar: /api/places/{placeId}/dishes
 
-### `npm run eject`
+## Funcionamento básico do sistema:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- O sistema inicia com a listagem dos lugares disponíveis para inclusão de pratos
+- Ao clicar no card referente a algum dos lugares, serão listados os pratos já cadastrados para ele
+- Ao clicar no botão de adicionar, ao lado do card do lugar, o usuário será direcionado a tela de cadastro de novo prato para aquele lugar
+- Na tela de listagem de pratos já cadastrados, é mostrado um botão amarelo, também para direcionamento a página de cadastro de pratos
+- Ao clicar no botão de retornar, nas telas de cadastro de prato e lista de pratos, o usuário será direcionado a página de lugares
+- Rotas inválidas ou vazias farão com que seja realizado o direcionamento para a página de lugares, no caminho /places
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Rotas da parte do cliente
+Página de lugares: /places
+Página de pratos: /places/{placeId}/dishes
+Página de cadastro de prato: /places/{placeId}/dishes/new
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Desenvolvimentos futuros:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-=======
-# 4alltest-client
->>>>>>> e783c44aa43ffb74abbee548839d1787d16235fa
+O sistema foi realizado buscando otimizar o tempo de desenvolvimento para entrega, portanto alguns pontos seriam interessantes para desenvolvimento futuro:
+- Paginação da listagem dos lugares
+- Paginação da listagem dos pratos
+- Criação de cadastro para lugares
+- Inclusão de componentes para mensagens personalizadas na parte do cliente
+- Inclusão de estrelas para a votação da qualidade de cada restaurante e pratos
+- Autenticação e criação de usuários
+- Inclusão de camada de segurança na parte do servidor, com controle de requisições
