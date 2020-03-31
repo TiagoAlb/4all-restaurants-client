@@ -54,7 +54,9 @@ Criar novo prato em um lugar: /api/places/{placeId}/dishes
 
 ### Rotas da parte do cliente
 Página de lugares: /places
+
 Página de pratos: /places/{placeId}/dishes
+
 Página de cadastro de prato: /places/{placeId}/dishes/new
 
 ## Desenvolvimentos futuros:
