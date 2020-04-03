@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Container } from '@material-ui/core/';
 import Header from '../../Components/Header/Header';
 import SubHeader from '../../Components/SubHeader/SubHeader';
+import LinkedInCard from '../../Components/LinkedInCard/LinkedInCard';
 import RestService from '../../Services/RestService';
 
 const useStyles = makeStyles(theme => ({
@@ -92,6 +93,7 @@ export default function Dishes(props) {
                         Salvar
                     </Button>
                 </form>
+                <div className="linkedin"><LinkedInCard /></div>
             </Container>
         </div >
     );

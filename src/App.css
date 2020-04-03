@@ -17,6 +17,13 @@ body {
   text-align: center;
 }
 
+.linkedin {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header {
   background-color: transparent;
   color: #f5f5f5;

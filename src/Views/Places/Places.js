@@ -7,6 +7,7 @@ import AddCircle from '@material-ui/icons/AddCircleOutline';
 import Header from '../../Components/Header/Header';
 import { Link } from 'react-router-dom';
 import Card from '../../Components/Card/CardPlace';
+import LinkedInCard from '../../Components/LinkedInCard/LinkedInCard';
 import RestService from '../../Services/RestService';
 
 const useStyles = makeStyles(theme => ({
@@ -103,6 +104,7 @@ export default function Places(props) {
                         ))
                         : message
                 }
+                <div className="linkedin"><LinkedInCard /></div>
             </Container>
         </div>
     );

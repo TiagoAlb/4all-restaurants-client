@@ -7,6 +7,7 @@ import SubHeader from '../../Components/SubHeader/SubHeader';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Card from '../../Components/Card/CardDish';
+import LinkedInCard from '../../Components/LinkedInCard/LinkedInCard';
 import RestService from '../../Services/RestService';
 
 const useStyles = makeStyles(theme => ({
@@ -101,6 +102,7 @@ export default function Dishes(props) {
                         ))
                         : message
                 }
+                <div className="linkedin"><LinkedInCard /></div>
             </Container>
             <Link to={`/places/${props.match.params.id}/dishes/new`}>
                 <Fab color="primary" className={classes.fab} aria-label="add">
